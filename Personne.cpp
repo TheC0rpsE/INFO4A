@@ -1,4 +1,4 @@
-//Classe Personne pour pour l'exercice 1 à 5 du TP2C++
+//Classe Personne pour l'exercice 1 à 5 du TP2C++
 
 #include <iostream>
 #include <string>
