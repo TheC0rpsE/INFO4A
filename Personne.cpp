@@ -1,70 +1,89 @@
+//Classe Personne pour pour l'exercice 1 à 5 du TP2C++
+
 #include <iostream>
 #include <string>
-#include<ctime>
+#include <ctime>
 
 using namespace std;
 
-class Personne {
-    private:
-        string nom;
-        string prenom;
-        int sexe;
-        int anneeNaissance;
-    public:
-        // Constructeur
-        Personne(string t, string p, string n, int a) {
-            titre = t;
-            prenom = p;
-            nom = n;
-            anneeNaissance = a;
-        }
+class Personne
+{
+private:
+    string nom;
+    string prenom;
+    string sexe;
+    int anneeNaissance;
 
-        // Accesseurs
-        string getNom() {
-            return nom;
-        }
-        string getPrenom() {
-            return prenom;
-        }
-        string getTitre() {
-            return titre;
-        }
-        int getAnneeNaissance() {
-            return anneeNaissance;
-        }
+public:
+    // Constructeur
+    Personne(string s, string p, string n, int a)
+    {
+        nom = n;
+        prenom = p;
+        anneeNaissance = a;
+        sexe = s;
+    }
 
-        int getAge(){
-            time_t now = time(0);
-            tm *ltm = localtime(&now);
-            int year_now = 1900 + ltm->tm_year;
-            return year_now-anneeNaissance;
-        }
-        
-        //Methode
-        int Age(int anneNai){
-            time_t now = time(0);
-            tm *ltm = localtime(&now);
-            int year_now = 1900 + ltm->tm_year;
-            return year_now-anneNai;
-        }
+    // Accesseurs
+    string getNom()
+    {
+        return nom;
+    }
+    string getPrenom()
+    {
+        return prenom;
+    }
 
-        // Mutateurs
-        void setNom(string n) {
-            nom = n;
-        }
-        void setPrenom(string p) {
-            prenom = p;
-        }
-        void setTitre(string t) {
-            titre = t;
-        }
-        void setAnneeNaissance(int a) {
-            anneeNaissance = a;
-        }
+    int getAnneeNaissance()
+    {
+        return anneeNaissance;
+    }
 
-        // Méthode pour afficher les informations
-        void afficherInfos() {
-            cout << titre << ". " << prenom << " " << nom << " est né en " << anneeNaissance << endl;
-        }
+    string getSexe()
+    {
+        return sexe;
+    }
+
+    int getAge()
+    {
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+        int year_now = 1900 + ltm->tm_year;
+        return year_now - anneeNaissance;
+    }
+
+    // Methode
+
+    int Age(int anneNai)
+    {
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+        int year_now = 1900 + ltm->tm_year;
+        return year_now - anneNai;
+    }
+
+    // Mutateurs
+    void setNom(string n)
+    {
+        nom = n;
+    }
+    void setPrenom(string p)
+    {
+        prenom = p;
+    }
+
+    void setAnneeNaissance(int a)
+    {
+        anneeNaissance = a;
+    }
+    
+    void setSexe(string s)
+    {
+        sexe = s;
+    }
+    // Méthode pour afficher les informations
+    void afficherInfos()
+    {
+        cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << endl;
+    }
 };
-
