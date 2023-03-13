@@ -13,18 +13,21 @@ private:
     string prenom;
     string sexe;
     int anneeNaissance;
+
     Personne *Conj;
+    bool marie;
     string nomConj;
     string nomusage;
 
-        public :
-        // Constructeur
-        Personne(string s, string p, string n, int a)
+public:
+    // Constructeur
+    Personne(string s, string p, string n, int a)
     {
         nom = n;
         prenom = p;
         anneeNaissance = a;
         sexe = s;
+        marie=false;
         Conj = NULL;
     }
 
@@ -56,23 +59,23 @@ private:
         return year_now - anneeNaissance;
     }
 
-    string getStatut()
+    bool getStatut()
     {
-        if (Conj == NULL)
+        if (marie)
         {
-            return NULL;
-        }
-        else
-        {
-            return "Marié(e)";
+            return true;
+        }else{
+            return false;
         }
     }
 
-    string getnomUsage(){
+    string getnomUsage()
+    {
         return nomusage;
     }
 
-    string getnomUsageConj(){
+    string getnomUsageConj()
+    {
         return nomConj;
     }
 
@@ -86,27 +89,32 @@ private:
         return year_now - anneNai;
     }
 
-    void marier(Personne *p, string nomUsage, string nomUsageConj)
-    {
-        if (p->getStatut() == "Célibataire")
-        {
-            cout << "ERROR" << endl;
-        }
-        else
-        {
+    void marier(Personne* p, string nomUsage, string nomUsageConj) {
+            if (marie || p->getStatut()) {
+                cout << "Erreur : une des deux personnes est déjà mariée" << endl;
+                return;
+            }
+
+            marie = true;
+            nomUsage = nomUsage;
             Conj = p;
-            nomusage = nomUsage;
-            nomConj = nomUsageConj;
-            p.setStatut(this);
-            p.set
+            nomusage=nomUsage;
+            p->setMarie(true);
+            p->setnomUsage(nomUsageConj);
+            p->setConj(this);
+            p->setnomUsageConj(nomUsage);
         }
-    }
 
     // Mutateurs
     void setNom(string n)
     {
         nom = n;
     }
+
+    void setMarie(bool b){
+        marie=b;
+    }
+
     void setPrenom(string p)
     {
         prenom = p;
@@ -122,27 +130,47 @@ private:
         sexe = s;
     }
 
-    void setStatut(Personne *p){
+    void setStatut(Personne *p)
+    {
         Conj = p;
     }
 
-    void setnomUsage(string s){
+    void setnomUsage(string s)
+    {
         nomusage = s;
     }
 
-    void setnomUsageConj(string s){
+    void setnomUsageConj(string s)
+    {
         nomConj = s;
     }
 
-
-
+    void setConj(Personne* p){
+        Conj=p;
+    }
     // Méthode pour afficher les informations
     void afficherInfos()
     {
-        if(getStatut()==NULL){
-        cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << "célibataire " endl;
-        }else{
-            cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << " ayant comme nom d'usage " << nomusage <<", marié(e) avec " << Conj.getSexe() << " " <<  Conj.getNom() << "utilisant le nom " << getnomUsageConj() endl;
+        if (getStatut() == false)
+        {
+            cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << " est célibataire " << endl;
+        }
+        else
+        {
+            cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << " ayant comme nom d'usage " << nomusage << ", marié(e) avec " << Conj->getSexe() << " " << Conj->getNom() << " utilisant le nom d'usage " << Conj->getnomUsage() << endl;
         }
     }
 };
+
+int main() {
+    Personne p("M", "Pierre", "Holly", 1965);
+    Personne q("Mme","Jeanne","Martin",1975);
+    Personne s("M","Gille","Forêt",1988);
+    p.afficherInfos();
+    q.afficherInfos();
+    s.afficherInfos();
+
+    p.marier(&q,"Holly","Holly");
+    p.afficherInfos();
+    return 0;
+}

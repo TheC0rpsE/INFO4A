@@ -87,3 +87,13 @@ public:
         cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << endl;
     }
 };
+
+int main() {
+    Personne p("M", "Pierre", "Holly", 1965);
+    Personne q("Mme","Jeanne","Martin",1975);
+    Personne s("M","Gille","Forêt",1988);
+    p.afficherInfos();
+    q.afficherInfos();
+    s.afficherInfos();
+    return 0;
+}
