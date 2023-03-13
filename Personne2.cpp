@@ -26,9 +26,9 @@ public:
         nom = n;
         prenom = p;
         anneeNaissance = a;
-        nomusage=n;
+        nomusage = n;
         sexe = s;
-        marie=false;
+        marie = false;
         Conj = NULL;
     }
 
@@ -65,7 +65,9 @@ public:
         if (marie)
         {
             return true;
-        }else{
+        }
+        else
+        {
             return false;
         }
     }
@@ -84,23 +86,25 @@ public:
 
     int Age(int anne)
     {
-        return anne-anneeNaissance;
+        return anne - anneeNaissance;
     }
 
-    void marier(Personne* p, string nomUsage, string nomUsageConj) {
-            if (marie || p->getConj()) {
-                cout << "Erreur : une des deux personnes est déjà mariée" << endl;
-                return;
-            }
-
-            marie = true;
-            nomusage = nomUsage;
-            Conj = p;
-            p->setMarie(true);
-            p->setnomUsage(nomUsageConj);
-            p->setConj(this);
-            p->setnomUsageConj(nomUsage);
+    void marier(Personne *p, string nomUsage, string nomUsageConj)
+    {
+        if (marie || p->getConj())
+        {
+            cout << "Erreur : une des deux personnes est déjà mariée" << endl;
+            return;
         }
+
+        marie = true;
+        nomusage = nomUsage;
+        Conj = p;
+        p->setMarie(true);
+        p->setnomUsage(nomUsageConj);
+        p->setConj(this);
+        p->setnomUsageConj(nomUsage);
+    }
 
     // Mutateurs
     void setNom(string n)
@@ -108,8 +112,9 @@ public:
         nom = n;
     }
 
-    void setMarie(bool b){
-        marie=b;
+    void setMarie(bool b)
+    {
+        marie = b;
     }
 
     void setPrenom(string p)
@@ -156,15 +161,16 @@ public:
     }
 };
 
-int main() {
+int main()
+{
     Personne p("M", "Pierre", "Holly", 1965);
-    Personne q("Mme","Jeanne","Martin",1975);
-    Personne s("M","Gille","Forêt",1988);
+    Personne q("Mme", "Jeanne", "Martin", 1975);
+    Personne s("M", "Gille", "Forêt", 1988);
     p.afficherInfos();
     q.afficherInfos();
     s.afficherInfos();
 
-    p.marier(&q,"Holly","Holly");
+    p.marier(&q, "Holly", "Holly");
     p.afficherInfos();
     return 0;
 }
