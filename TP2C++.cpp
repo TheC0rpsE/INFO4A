@@ -1,4 +1,4 @@
-#include "Personne.h"
+#include "Personne"
 #include <iostream>
 
 int main() {

@@ -26,6 +26,7 @@ public:
         nom = n;
         prenom = p;
         anneeNaissance = a;
+        nomusage=n;
         sexe = s;
         marie=false;
         Conj = NULL;
@@ -59,7 +60,7 @@ public:
         return year_now - anneeNaissance;
     }
 
-    bool getStatut()
+    bool getConj()
     {
         if (marie)
         {
@@ -81,24 +82,20 @@ public:
 
     // Methode
 
-    int Age(int anneNai)
+    int Age(int anne)
     {
-        time_t now = time(0);
-        tm *ltm = localtime(&now);
-        int year_now = 1900 + ltm->tm_year;
-        return year_now - anneNai;
+        return anne-anneeNaissance;
     }
 
     void marier(Personne* p, string nomUsage, string nomUsageConj) {
-            if (marie || p->getStatut()) {
+            if (marie || p->getConj()) {
                 cout << "Erreur : une des deux personnes est déjà mariée" << endl;
                 return;
             }
 
             marie = true;
-            nomUsage = nomUsage;
+            nomusage = nomUsage;
             Conj = p;
-            nomusage=nomUsage;
             p->setMarie(true);
             p->setnomUsage(nomUsageConj);
             p->setConj(this);
@@ -130,7 +127,7 @@ public:
         sexe = s;
     }
 
-    void setStatut(Personne *p)
+    void setConj(Personne *p)
     {
         Conj = p;
     }
@@ -145,13 +142,10 @@ public:
         nomConj = s;
     }
 
-    void setConj(Personne* p){
-        Conj=p;
-    }
     // Méthode pour afficher les informations
     void afficherInfos()
     {
-        if (getStatut() == false)
+        if (getConj() == false)
         {
             cout << sexe << ". " << prenom << " " << nom << " est né en " << anneeNaissance << " est célibataire " << endl;
         }

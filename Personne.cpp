@@ -1,4 +1,4 @@
-//Classe Personne pour l'exercice 1 à 5 du TP2C++
+// Classe Personne pour l'exercice 1 à 5 du TP2C++
 
 #include <iostream>
 #include <string>
@@ -29,6 +29,7 @@ public:
     {
         return nom;
     }
+
     string getPrenom()
     {
         return prenom;
@@ -54,12 +55,9 @@ public:
 
     // Methode
 
-    int Age(int anneNai)
+    int Age(int anne)
     {
-        time_t now = time(0);
-        tm *ltm = localtime(&now);
-        int year_now = 1900 + ltm->tm_year;
-        return year_now - anneNai;
+        return anne-anneeNaissance;
     }
 
     // Mutateurs
@@ -76,7 +74,7 @@ public:
     {
         anneeNaissance = a;
     }
-    
+
     void setSexe(string s)
     {
         sexe = s;
@@ -88,12 +86,14 @@ public:
     }
 };
 
-int main() {
+int main()
+{
     Personne p("M", "Pierre", "Holly", 1965);
-    Personne q("Mme","Jeanne","Martin",1975);
-    Personne s("M","Gille","Forêt",1988);
+    //Personne q("Mme", "Jeanne", "Martin", 1975);
+    //Personne s("M", "Gille", "Forêt", 1988);
     p.afficherInfos();
-    q.afficherInfos();
-    s.afficherInfos();
+    //q.afficherInfos();
+    //s.afficherInfos();
+    cout << p.getPrenom()<< " à :" << p.Age(2000)<< " ans " << endl;
     return 0;
 }
